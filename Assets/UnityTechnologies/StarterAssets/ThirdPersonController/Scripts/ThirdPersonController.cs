@@ -97,6 +97,7 @@ namespace StarterAssets
         private int _animIDJump;
         private int _animIDFreeFall;
         private int _animIDMotionSpeed;
+        private int _animIDWave;
 
 #if ENABLE_INPUT_SYSTEM 
         private PlayerInput _playerInput;
@@ -159,6 +160,7 @@ namespace StarterAssets
             JumpAndGravity();
             GroundedCheck();
             Move();
+            Wave();
         }
 
         private void LateUpdate()
@@ -173,6 +175,7 @@ namespace StarterAssets
             _animIDJump = Animator.StringToHash("Jump");
             _animIDFreeFall = Animator.StringToHash("FreeFall");
             _animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
+            _animIDWave = Animator.StringToHash("Wave");
         }
 
         private void GroundedCheck()
@@ -209,6 +212,39 @@ namespace StarterAssets
             // Cinemachine will follow this target
             CinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch + CameraAngleOverride,
                 _cinemachineTargetYaw, 0.0f);
+        }
+
+        private void Wave()
+        {
+
+            if (_hasAnimator)
+            {
+                _animator.ResetTrigger(_animIDWave);
+            }
+
+            if (_input.wave)
+            {
+                if (_hasAnimator)
+                {
+                    _animator.SetTrigger(_animIDWave);
+                }
+            }
+
+            //else
+            //{
+            //    if (_hasAnimator)
+            //    {
+            //        _animator.SetBool(_animIDWave, );
+            //    }
+            //}
+
+
+
+            //if (_input.wave)
+            //{
+            //    Debug.Log("Waving");
+            //    _animator.SetBool(_animIDWave, true);
+            //}
         }
 
         private void Move()

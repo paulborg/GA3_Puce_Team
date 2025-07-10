@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 public class CameraMousePointer : MonoBehaviour
 {
     public Camera mainCamera;
+    public static Ray mouseRay;
 
     void Start()
     {
@@ -16,6 +17,7 @@ public class CameraMousePointer : MonoBehaviour
     {
         RaycastHit hitInfo;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        mouseRay = ray;
 
         if (!EventSystem.current.IsPointerOverGameObject() && Physics.Raycast(ray, out hitInfo, Mathf.Infinity))
         {
@@ -27,16 +29,22 @@ public class CameraMousePointer : MonoBehaviour
 
             if (hitInfo.transform.CompareTag("Interact") && Input.GetMouseButton(0))
             {
-                Debug.Log("Interact found: " + hitInfo.transform);
-
-                //hitInfo.transform.GetComponent<MeshRenderer>().material.SetColor("_BaseColor", Color.red);
-                //hitInfo.transform.GetComponent<InteractSelector>().Selected(true);
-
                 mainCamera.GetComponent<CameraMover>().camTargetPos = hitInfo.transform;   
             }
-
-
-
         }
     }
+
+    public static Vector3 ClosestPointOnRay(Ray ray, Vector3 point)
+    {
+        Vector3 originToPoint = point - ray.origin;
+        float dot = Vector3.Dot(originToPoint, ray.direction);
+        return ray.origin + ray.direction * Mathf.Max(dot, 0f);
+    }
 }
+
+
+
+//Debug.Log("Interact found: " + hitInfo.transform);
+
+//hitInfo.transform.GetComponent<MeshRenderer>().material.SetColor("_BaseColor", Color.red);
+//hitInfo.transform.GetComponent<InteractSelector>().Selected(true);

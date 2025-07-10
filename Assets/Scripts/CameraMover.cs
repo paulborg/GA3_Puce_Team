@@ -8,22 +8,37 @@ public class CameraMover : MonoBehaviour
     private Vector3 camCurrentPos;
     //public int targetPoint;
 
+    [Header("Mouse Sway Settings")]
+    public float maxAngleX = 5f;
+    public float maxAngleY = 10f;
+    public float swaySmoothSpeed = 5f;
+
+    private Quaternion initialRotation;
 
     void Start()
     {
         camTargetPos = null;
         camCurrentPos = transform.position;
+        initialRotation = transform.localRotation;
     }
-
 
     void Update()
     {
-        if (camTargetPos != null)
+        UpdateMouseSway();
+
+
+
+
+
+        // Camera Movement
+        /*if (camTargetPos != null)
         {
             transform.position = Vector3.MoveTowards(camCurrentPos, camTargetPos.position, 5f * Time.deltaTime);
             camCurrentPos = transform.position;
-
         }
+        */
+        //Mouse Sway Effect
+
 
 
         /* -- Thought I'd have to reset the target position once arriving at it, for some reason... 
@@ -43,6 +58,19 @@ public class CameraMover : MonoBehaviour
         //    camTargetPos = null;
         //    //camCurrentPos = transform.position;
         //}
+    }
+
+    void UpdateMouseSway()
+    {
+        Vector2 screenPos = Input.mousePosition;
+        float normalizedX = (screenPos.x / Screen.width - 0.5f) * 2f;
+        float normalizedY = (screenPos.y / Screen.height - 0.5f) * 2f;
+
+        float targetX = -normalizedY * maxAngleX;
+        float targetY = normalizedX * maxAngleY;
+
+        Quaternion targetRotation = initialRotation * Quaternion.Euler(targetX, targetY, 0f);
+        transform.localRotation = Quaternion.Slerp(transform.localRotation, targetRotation, Time.deltaTime * swaySmoothSpeed);
     }
 
 }
