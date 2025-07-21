@@ -17,6 +17,7 @@ public class CameraMousePointer : MonoBehaviour
     {
         RaycastHit hitInfo;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        //Ray ray = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mouseRay = ray;
 
         if (!EventSystem.current.IsPointerOverGameObject() && Physics.Raycast(ray, out hitInfo, Mathf.Infinity))
@@ -29,7 +30,17 @@ public class CameraMousePointer : MonoBehaviour
 
             if (hitInfo.transform.CompareTag("Interact") && Input.GetMouseButton(0))
             {
-                mainCamera.GetComponent<CameraMover>().camTargetPos = hitInfo.transform;   
+                mainCamera.GetComponent<CameraMover>().camTargetPos = hitInfo.transform;
+                print("clicked on " + hitInfo.transform);
+                DialogueTrigger dialogueTrigger = hitInfo.transform.GetComponentInParent<DialogueTrigger>();
+                if (dialogueTrigger != null)
+                {
+                    dialogueTrigger.StartDialogue();
+                }
+                else
+                {
+                    Debug.LogWarning("NoDialogieTrigger found on: " + hitInfo.transform);
+                }
             }
         }
     }

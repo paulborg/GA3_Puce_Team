@@ -1583,7 +1583,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Answers:
   - {fileID: 2008157286}
-  text: Choice 1 Result is RED!
+  text: Choice 1 Result is BLUE!
 --- !u!1 &1214404149
 GameObject:
   m_ObjectHideFlags: 0
