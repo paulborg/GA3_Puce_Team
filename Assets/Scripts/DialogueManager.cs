@@ -46,6 +46,7 @@ public class DialogueManager : MonoBehaviour
         else
         {
             Debug.Log("Dialogue Ended!");
+            dialogueGroup.LeanAlpha(0, 0.25f);
             isActive = false;
         }
     }
