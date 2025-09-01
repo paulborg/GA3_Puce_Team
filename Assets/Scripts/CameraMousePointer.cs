@@ -32,15 +32,24 @@ public class CameraMousePointer : MonoBehaviour
             {
                 mainCamera.GetComponent<CameraMover>().camTargetPos = hitInfo.transform;
                 print("clicked on " + hitInfo.transform);
+
                 DialogueTrigger dialogueTrigger = hitInfo.transform.GetComponentInParent<DialogueTrigger>();
+                ImpDialogueTrigger impDialogueTrigger = hitInfo.transform.GetComponentInParent<ImpDialogueTrigger>();
                 if (dialogueTrigger != null)
                 {
                     dialogueTrigger.StartDialogue();
                 }
+
                 else
                 {
                     Debug.LogWarning("NoDialogieTrigger found on: " + hitInfo.transform);
                 }
+
+                //if (impDialogueTrigger != null)
+                //{
+                //    impDialogueTrigger.TriggerDialogue();
+                //}
+
             }
         }
     }

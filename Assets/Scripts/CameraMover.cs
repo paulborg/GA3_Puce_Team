@@ -7,6 +7,8 @@ public class CameraMover : MonoBehaviour
 {
     public Transform camTargetPos;
     private Vector3 camCurrentPos;
+    public float moveSpeed = 5f;
+
     //public int targetPoint;
 
     [Header("Mouse Sway Settings")]
@@ -34,22 +36,26 @@ public class CameraMover : MonoBehaviour
         initialRotation = transform.localRotation;
 
         //vvv_Part of crosshair misalignment fix_vvv
-        Cursor.visible = false;
+        //Cursor.visible = false;
         screenCenter = new Vector2(Screen.width / 2F, Screen.height / 2f);
-        parentCanvas = crosshairUI.GetComponentInParent<Canvas>();
+        //parentCanvas = crosshairUI.GetComponentInParent<Canvas>();
     }
 
     void Update()
     {
         UpdateMouseSway();
-        UpdateCustomCursorPosition(); //Part of crosshair misalignment fix
+        //UpdateCustomCursorPosition(); //Part of crosshair misalignment fix
         //UpdateCrosshairPosition(); //Part of crosshair misalignment fix
 
-        //Camera Movement
-        if (camTargetPos != null)
+        
+        if (camTargetPos == null) return;
+
+        transform.position = Vector3.MoveTowards(camCurrentPos, camTargetPos.position, moveSpeed * Time.deltaTime);
+        camCurrentPos = transform.position;
+
+        if(Vector3.Distance(camCurrentPos, camTargetPos.position) < 0.01f)
         {
-            transform.position = Vector3.MoveTowards(camCurrentPos, camTargetPos.position, 5f * Time.deltaTime);
-            camCurrentPos = transform.position;
+            camTargetPos = null;
         }
 
         #region //Early Cam Movement       
@@ -65,11 +71,21 @@ public class CameraMover : MonoBehaviour
 
         //}
 
-        else if (camTargetPos != null && camTargetPos.position == transform.position)
-        {
-            camTargetPos = null;
-            camCurrentPos = transform.position;
-        }
+
+        #endregion
+        #region Original Camera Movement
+
+        //    if (camTargetPos != null)
+        //    {
+        //        transform.position = Vector3.MoveTowards(camCurrentPos, camTargetPos.position, 5f * Time.deltaTime);
+        //        camCurrentPos = transform.position;
+        //    }
+
+        //    else if (camTargetPos != null && camTargetPos.position == transform.position)
+        //    {
+        //        camTargetPos = null;
+        //        camCurrentPos = transform.position;
+        //    }
         #endregion
     }
 
@@ -102,22 +118,27 @@ public class CameraMover : MonoBehaviour
         #endregion
     }
 
-    void UpdateCustomCursorPosition()
+    public void SetTarget(Transform target)
     {
-        Vector2 screenPos = Input.mousePosition;
-
-        RectTransform canvasRect = parentCanvas.GetComponent<RectTransform>();
-        Vector2 localPoint;
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRect, screenPos, null, out localPoint);
-
-        crosshairUI.anchoredPosition = localPoint;
+        camTargetPos = target;
     }
 
-    private void OnGUI()
-    {
-        Vector2 pos = crosshairUI.position;
-        GUI.Label(new Rect(pos.x, Screen.height - pos.y, 200, 40), "•");
-    }
+    //void UpdateCustomCursorPosition()
+    //{
+    //    Vector2 screenPos = Input.mousePosition;
+
+    //    RectTransform canvasRect = parentCanvas.GetComponent<RectTransform>();
+    //    Vector2 localPoint;
+    //    RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRect, screenPos, null, out localPoint);
+
+    //    crosshairUI.anchoredPosition = localPoint;
+    //}
+
+    //private void OnGUI()
+    //{
+    //    Vector2 pos = crosshairUI.position;
+    //    GUI.Label(new Rect(pos.x, Screen.height - pos.y, 200, 40), "•");
+    //}
 
     //void UpdateCrosshairPosition()
     //{

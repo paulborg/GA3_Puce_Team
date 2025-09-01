@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afc70d8ff8b7a554788bc1149173b13d, type: 3}
+  m_Name: Hallway_DSO
+  m_EditorClassIdentifier: 
+  charName: Me
+  dialogueLines:
+  - Hmm, should I head down here?
+  - I'll keep going.
+  - I'll check in at the reception first.
+  choices:
+  - dialogueIndex: 0
+    choices:
+    - Yes, I'll keep going
+    - No, I should talk to the receptionist first.
+    nextDialogueIndexes: 0300000003000000
+    traitToUpdate:
+    - openness
+    - conscientiousness
+    traitDelta:
+    - -0.1
+    - 0.2

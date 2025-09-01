@@ -1,0 +1,14 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/DialogueUI.uss?fileID=7433441132597879392&amp;guid=cc3895a485a4ae949abf6a36a4e1671b&amp;type=3#DialogueUI" />
+    <ui:VisualElement name="Panel" class="panel hide" style="flex-grow: 1; position: relative; display: flex; padding-top: 26px; margin-right: 150px; margin-left: 150px;">
+        <ui:VisualElement name="TextBox" style="flex-grow: 1; align-items: center; min-width: auto; max-width: none; max-height: none; min-height: auto; width: 1529px; height: auto; margin-bottom: 0;">
+            <ui:Label tabindex="-1" text="Dialogue text dialogue text dialogue text dialogue text dialogue text dialogue text dialogue text dialogue text " parse-escape-sequences="true" display-tooltip-when-elided="true" name="DialogueText" usage-hints="None" style="position: relative; align-items: flex-start; align-self: flex-start; font-size: 50px; -unity-font-style: normal; color: rgb(255, 255, 255); -unity-text-align: upper-left; white-space: normal; text-shadow: 10.6px 32.5px 9.6px rgba(0, 0, 0, 0.5); padding-top: 0; padding-bottom: 0; padding-right: 0;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="ButtonBox" style="flex-grow: 1; align-items: center; min-width: auto; max-width: none; max-height: none; min-height: auto; width: 1632px; height: auto; margin-bottom: 0; flex-direction: row; justify-content: center; align-self: center;">
+            <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" />
+            <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" />
+            <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" />
+            <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" style="display: flex; visibility: visible;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

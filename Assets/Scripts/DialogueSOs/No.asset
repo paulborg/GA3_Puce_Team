@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 113a074046585d343938bb5aaf326762, type: 3}
+  m_Name: No
+  m_EditorClassIdentifier: 
+  choices:
+  - {fileID: 11400000, guid: 50327bfdd7c906e4f9916de8ed96a391, type: 2}
+  optionName: No
+  dialogueText: No, I should go to reception first.
